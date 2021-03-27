@@ -4,7 +4,7 @@ mixin method (method)
   - var mapping = { GET: 'success', POST: 'primary', PUT: 'info', PATCH: 'warning' , DELETE: 'danger' }
   - var className = mapping[method] ? mapping[method] : 'default'
 
-  span(class='label-#{className}').label= method
+  span(class=`label-${className}`).label= method
 
 block content
   div(data-page="bin/log").container
@@ -40,16 +40,16 @@ block content
 
             td= entry.request.url.slice(entry.request.url.indexOf('/bin/'))
 
-            td #{entry.request.bodySize / 1000} KB
+            td= (entry.request.bodySize / 1000) + ' KB'
 
             td.date= moment(entry.startedDateTime).fromNow()
             td.ip= entry.clientIPAddress
             td.action.text-right
               div.btn-group.btn-group-sm
-                a.btn.btn-default(href='#entry-#{id}'): i.fa.fa-link
+                a.btn.btn-default(href=`#entry-${id}`): i.fa.fa-link
                 button.btn.btn-default(data-id= id): i.fa.fa-chevron-down
 
-          tr.data(id='entry-#{id}')
+          tr.data(id=`entry-${id}`)
             td(colspan= 6)
               div.row
                 div.col-sm-6
